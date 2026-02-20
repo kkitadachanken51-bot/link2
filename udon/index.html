@@ -1,0 +1,302 @@
+import React, { useState, useEffect } from 'react';
+import { MapPin, Phone, Clock, ArrowRight, Instagram, Twitter } from 'lucide-react';
+
+const App = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="font-sans text-black bg-white min-h-screen selection:bg-black selection:text-white">
+      
+      {/* ---------------- Navigation ---------------- */}
+      <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white shadow-sm py-4' : 'bg-transparent py-6'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center">
+            <h1 className={`text-2xl font-black tracking-widest ${isScrolled ? 'text-black' : 'text-white drop-shadow-lg'}`}>
+              銀 穂の香
+            </h1>
+          </div>
+          <div className="hidden md:flex space-x-10 items-center">
+            {['コンセプト', 'おしながき', '手打ち体験', '店舗情報'].map((item) => (
+              <a key={item} href={`#${item}`} className={`text-sm font-bold tracking-widest hover:opacity-50 transition-opacity ${isScrolled ? 'text-black' : 'text-white drop-shadow-md'}`}>
+                {item}
+              </a>
+            ))}
+            <div className={`flex space-x-4 pl-6 border-l ${isScrolled ? 'border-gray-300 text-black' : 'border-white/30 text-white'}`}>
+              <Instagram className="w-5 h-5 cursor-pointer hover:opacity-50 transition-opacity" />
+              <Twitter className="w-5 h-5 cursor-pointer hover:opacity-50 transition-opacity" />
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* ---------------- Hero Section ---------------- */}
+      <header className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1617093727343-374698b1b08d?auto=format&fit=crop&q=80&w=2000" 
+            alt="銀 穂の香のうどん" 
+            className="w-full h-full object-cover opacity-70 scale-105 animate-[pulse_20s_ease-in-out_infinite_alternate]"
+          />
+        </div>
+        
+        <div className="relative z-10 flex flex-col items-center justify-center h-full pt-20">
+          <div className="flex space-x-4 md:space-x-8 text-white">
+            <h2 className="text-4xl md:text-6xl font-black tracking-[0.3em] drop-shadow-2xl" style={{ writingMode: 'vertical-rl', textOrientation: 'upright' }}>
+              日々つくり続ける。
+            </h2>
+            <h2 className="text-4xl md:text-6xl font-black tracking-[0.3em] drop-shadow-2xl mt-16 md:mt-24" style={{ writingMode: 'vertical-rl', textOrientation: 'upright' }}>
+              本気で、
+            </h2>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10">
+          <span className="text-white text-xs font-bold tracking-[0.2em] mb-4 rotate-90 origin-left">SCROLL</span>
+          <div className="w-[1px] h-16 bg-white/30 overflow-hidden">
+            <div className="w-full h-1/2 bg-white animate-[bounce_2s_infinite]"></div>
+          </div>
+        </div>
+      </header>
+
+      {/* ---------------- News Ticker ---------------- */}
+      <div className="bg-black text-white py-3 px-6 overflow-hidden flex items-center text-sm font-medium tracking-wider">
+        <span className="bg-white text-black px-2 py-0.5 mr-4 text-xs font-bold shrink-0">NEWS</span>
+        <div className="truncate">
+          平日ランチ限定「おばんざいサービス」大好評実施中！ / 土曜限定「うどん打ち体験」のご予約受付中
+        </div>
+      </div>
+
+      {/* ---------------- Message ---------------- */}
+      <section className="py-24 md:py-32 px-6 max-w-4xl mx-auto text-center">
+        <h3 className="text-2xl md:text-4xl font-black tracking-widest mb-10 leading-relaxed">
+          半田で味わう、<br className="md:hidden" />心温まる一杯。
+        </h3>
+        <p className="text-sm md:text-base leading-loose text-gray-700 tracking-widest text-justify md:text-center space-y-6">
+          <span className="block">うどん作りに携わって20年以上。</span>
+          <span className="block">その日の気温や湿度に合わせて微調整しながら打つ自家製麺。</span>
+          <span className="block">各地方から厳選した玉ねぎを丸ごと揚げた、究極の甘み。</span>
+          <span className="block mt-8 font-bold text-black">すべては、お客様の「美味しい」のために。</span>
+        </p>
+      </section>
+
+      {/* ---------------- Concept ---------------- */}
+      <section id="コンセプト" className="py-12 bg-gray-50">
+        {/* Concept 1 */}
+        <div className="flex flex-col md:flex-row items-stretch">
+          <div className="w-full md:w-1/2 h-[400px] md:h-[600px] relative">
+            <img src="https://images.unsplash.com/photo-1556910103-1c02745a872f?auto=format&fit=crop&q=80&w=1200" alt="自家製麺" className="w-full h-full object-cover" />
+          </div>
+          <div className="w-full md:w-1/2 flex items-center p-12 md:p-24 bg-white">
+            <div>
+              <span className="text-gray-400 font-bold tracking-[0.2em] text-sm block mb-4">01 / NOODLE</span>
+              <h3 className="text-3xl font-black tracking-wider mb-6">職人歴20年の<br />自家製麺</h3>
+              <p className="text-gray-600 leading-loose tracking-wide text-sm">
+                毎日店内で製造しているこだわり麺。季節、気温、湿度。その日の条件に合わせて水分量や塩分を微調整し、もっちりとしたコシと滑らかな喉越しを追求しています。本気で打つからこそ出せる食感をお楽しみください。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Concept 2 */}
+        <div className="flex flex-col md:flex-row-reverse items-stretch">
+          <div className="w-full md:w-1/2 h-[400px] md:h-[600px] relative">
+            <img src="https://images.unsplash.com/photo-1581184953963-d159715d6266?auto=format&fit=crop&q=80&w=1200" alt="丸ごと玉ねぎ天" className="w-full h-full object-cover" />
+          </div>
+          <div className="w-full md:w-1/2 flex items-center p-12 md:p-24 bg-gray-50">
+            <div>
+              <span className="text-gray-400 font-bold tracking-[0.2em] text-sm block mb-4">02 / SPECIALTY</span>
+              <h3 className="text-3xl font-black tracking-wider mb-6">名物<br />丸ごと玉ねぎ天</h3>
+              <p className="text-gray-600 leading-loose tracking-wide text-sm">
+                各地方から時期に合わせて一番美味しい玉ねぎを厳選。丸ごと一個をじっくりと時間をかけて揚げることで、玉ねぎ本来の究極の甘みを引き出しました。自慢の出汁に浸して食べるのが穂の香流。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Concept 3 */}
+        <div className="flex flex-col md:flex-row items-stretch">
+          <div className="w-full md:w-1/2 h-[400px] md:h-[600px] relative">
+            <img src="https://images.unsplash.com/photo-1580442151529-343f2f6e0e1e?auto=format&fit=crop&q=80&w=1200" alt="おばんざい" className="w-full h-full object-cover" />
+          </div>
+          <div className="w-full md:w-1/2 flex items-center p-12 md:p-24 bg-white">
+            <div>
+              <span className="text-gray-400 font-bold tracking-[0.2em] text-sm block mb-4">03 / HOSPITALITY</span>
+              <h3 className="text-3xl font-black tracking-wider mb-6">平日ランチ限定<br />おばんざい</h3>
+              <p className="text-gray-600 leading-loose tracking-wide text-sm">
+                うどんサラダや、出汁を取った後の鰹節で作る特製醤油煮など、手作りの温かいお惣菜を1回盛り放題でご提供。うどんが茹で上がるまでの間も、こだわりの味でおもてなしいたします。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- Menu (おしながき) ---------------- */}
+      <section id="おしながき" className="py-24 md:py-32 px-6 max-w-7xl mx-auto">
+        <div className="text-center mb-20">
+          <h2 className="text-sm font-bold tracking-[0.3em] text-gray-400 mb-2">MENU</h2>
+          <h3 className="text-3xl font-black tracking-widest text-black">おしながき</h3>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+          {/* Menu 1 */}
+          <div className="group cursor-pointer">
+            <div className="overflow-hidden bg-gray-100 aspect-square mb-6">
+              <img src="https://images.unsplash.com/photo-1617093727343-374698b1b08d?auto=format&fit=crop&q=80&w=800" alt="穂の香うどん" className="w-full h-full object-cover mix-blend-multiply group-hover:scale-110 transition-transform duration-700" />
+            </div>
+            <div className="flex justify-between items-start mb-2">
+              <h4 className="text-lg font-bold tracking-wider">穂の香うどん</h4>
+              <span className="bg-black text-white text-[10px] px-2 py-1 font-bold tracking-wider">名物</span>
+            </div>
+            <p className="text-sm text-gray-500 tracking-wide">大きな玉ねぎの天ぷらが丸ごと乗った、店名を冠した看板メニュー。</p>
+          </div>
+
+          {/* Menu 2 */}
+          <div className="group cursor-pointer">
+            <div className="overflow-hidden bg-gray-100 aspect-square mb-6">
+              <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&q=80&w=800" alt="カレーうどん" className="w-full h-full object-cover mix-blend-multiply group-hover:scale-110 transition-transform duration-700" />
+            </div>
+            <h4 className="text-lg font-bold tracking-wider mb-2">スパイシーカレーうどん</h4>
+            <p className="text-sm text-gray-500 tracking-wide">マイルドとは一線を画す、スパイスの効いた本格派。カツ乗せも人気。</p>
+          </div>
+
+          {/* Menu 3 */}
+          <div className="group cursor-pointer">
+            <div className="overflow-hidden bg-gray-100 aspect-square mb-6">
+              <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=800" alt="味噌煮込みうどん" className="w-full h-full object-cover mix-blend-multiply group-hover:scale-110 transition-transform duration-700" />
+            </div>
+            <h4 className="text-lg font-bold tracking-wider mb-2">味噌煮込みうどん</h4>
+            <p className="text-sm text-gray-500 tracking-wide">熱々の土鍋で提供される、甘めで万人受けする優しい味わい。</p>
+          </div>
+
+          {/* Menu 4 */}
+          <div className="group cursor-pointer">
+            <div className="overflow-hidden bg-gray-100 aspect-square mb-6">
+              <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=800" alt="定食メニュー" className="w-full h-full object-cover mix-blend-multiply group-hover:scale-110 transition-transform duration-700" />
+            </div>
+            <h4 className="text-lg font-bold tracking-wider mb-2">大海老フライ定食 他</h4>
+            <p className="text-sm text-gray-500 tracking-wide">10種以上の定食をご用意。夜は居酒屋メニューで宴会も可能です。</p>
+          </div>
+
+          {/* Menu 5 (かいうどん) */}
+          <div className="group cursor-pointer">
+            <div className="overflow-hidden bg-gray-100 aspect-square mb-6">
+              {/* プレビュー用に一時的なサンプル画像URLを設定しています。実際の環境では src="かいうどん.jpg" に戻してご使用ください。 */}
+              <img src="https://images.unsplash.com/photo-1564834724105-918b73d1b9e0?auto=format&fit=crop&q=80&w=800" alt="かいうどん" className="w-full h-full object-cover mix-blend-multiply group-hover:scale-110 transition-transform duration-700" />
+            </div>
+            <div className="flex justify-between items-center mb-2">
+              <h4 className="text-lg font-bold tracking-wider">かいうどん</h4>
+              <span className="text-sm font-bold tracking-widest text-black">1000円</span>
+            </div>
+            <p className="text-sm text-gray-500 tracking-wide">たっぷりのアサリと菜の花。貝の旨味が出汁に溶け出した奥深い味わい。</p>
+          </div>
+        </div>
+
+        <div className="mt-16 text-center">
+          <button className="inline-flex items-center space-x-2 border-b-2 border-black pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors font-bold tracking-widest text-sm">
+            <span>全てのメニューを見る</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </section>
+
+      {/* ---------------- Experience Banner ---------------- */}
+      <section id="手打ち体験" className="py-24 bg-black text-white px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="border border-white/50 px-4 py-1 text-xs font-bold tracking-widest mb-6 inline-block">土曜限定 / 要予約</span>
+          <h3 className="text-3xl md:text-5xl font-black tracking-widest mb-8 leading-tight">
+            家族で作る、<br className="md:hidden"/>うどん作り体験
+          </h3>
+          <p className="text-gray-300 tracking-widest leading-loose mb-10 text-sm md:text-base">
+            職人歴20年以上の店主がサポート。初めてでも安心です。<br />
+            自分たちで作ったうどんの味は格別。<br />
+            完成後は、天ぷらとともにお店で美味しくお召し上がりいただけます。<br />
+            （参加人数：2〜6名様 / 5人前のうどんを打ちます）
+          </p>
+          <a href="#店舗情報" className="inline-block bg-white text-black px-10 py-4 font-bold tracking-widest text-sm hover:bg-gray-200 transition-colors">
+            お電話で予約する
+          </a>
+        </div>
+      </section>
+
+      {/* ---------------- Information (店舗情報) ---------------- */}
+      <section id="店舗情報" className="py-24 md:py-32 px-6 max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-16">
+          <div className="w-full lg:w-1/3">
+            <h2 className="text-sm font-bold tracking-[0.3em] text-gray-400 mb-2">SHOP INFO</h2>
+            <h3 className="text-3xl font-black tracking-widest mb-10">店舗情報</h3>
+            
+            <div className="space-y-8">
+              <div>
+                <h4 className="font-bold tracking-widest mb-2 border-b pb-2">銀 穂の香</h4>
+                <p className="text-sm text-gray-600 leading-loose">落ち着いた雰囲気の古民家風の店内で、こだわりのうどんとお料理をお楽しみください。</p>
+              </div>
+
+              <dl className="space-y-4 text-sm tracking-wider">
+                <div className="flex">
+                  <dt className="w-24 font-bold shrink-0">ADDRESS</dt>
+                  <dd className="text-gray-600">〒475-0828<br/>愛知県半田市瑞穂町8-11-9</dd>
+                </div>
+                <div className="flex">
+                  <dt className="w-24 font-bold shrink-0">TEL</dt>
+                  <dd className="text-xl font-bold">050-5596-3176</dd>
+                </div>
+                <div className="flex">
+                  <dt className="w-24 font-bold shrink-0">OPEN</dt>
+                  <dd className="text-gray-600 leading-relaxed">
+                    平日・土日祝ランチ営業あり<br/>
+                    夜は居酒屋メニュー・各種宴会も承ります。<br/>
+                    <span className="text-xs text-gray-400 mt-1 block">※詳細はお電話または食べログ等をご確認ください。</span>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+
+          <div className="w-full lg:w-2/3 min-h-[400px] bg-gray-100 relative">
+            <iframe 
+              src="https://maps.google.com/maps?q=%E9%8A%80%E7%A9%82%E3%81%AE%E9%A6%99%20%E5%8D%8A%E7%94%B0%E5%B8%82&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0, position: 'absolute', top: 0, left: 0 }} 
+              allowFullScreen="" 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Google Map"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- Footer ---------------- */}
+      <footer className="bg-black text-white py-16 text-center">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-2xl font-black tracking-widest mb-8">銀 穂の香</h2>
+          <div className="flex justify-center space-x-8 mb-12 text-xs font-bold tracking-[0.2em]">
+            <a href="#コンセプト" className="hover:opacity-50 transition-opacity">CONCEPT</a>
+            <a href="#おしながき" className="hover:opacity-50 transition-opacity">MENU</a>
+            <a href="#手打ち体験" className="hover:opacity-50 transition-opacity">EXPERIENCE</a>
+            <a href="#店舗情報" className="hover:opacity-50 transition-opacity">SHOP</a>
+          </div>
+          <div className="flex justify-center space-x-6 mb-12">
+            <Instagram className="w-5 h-5 cursor-pointer hover:opacity-50 transition-opacity" />
+            <Twitter className="w-5 h-5 cursor-pointer hover:opacity-50 transition-opacity" />
+          </div>
+          <p className="text-[10px] tracking-widest text-gray-500">
+            &copy; {new Date().getFullYear()} GIN HONOKA. ALL RIGHTS RESERVED.
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
